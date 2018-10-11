@@ -1,0 +1,21 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {ngerman}{}
+\babel@toc {ngerman}{}
+\babel@toc {english}{}
+\babel@toc {ngerman}{}
+\contentsline {section}{\numberline {1}Ziele P5/P6}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Wunschziele}{1}{subsection.1.1}
+\contentsline {section}{\numberline {2}Grundkonzept}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Micro Controller Unit (MCU)}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Sensoren}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Kommunikationsmodul}{5}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Datenspeicherung}{6}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}RTC}{7}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Speisung}{8}{subsection.2.6}
+\contentsline {section}{\numberline {3}Verifikationskonzept}{9}{section.3}
+\contentsline {section}{\numberline {4}Zeitplan Projektverlauf}{10}{section.4}
+\contentsline {section}{\numberline {5}Budgetplanung}{11}{section.5}
+\contentsline {section}{\numberline {6}Risikoanalyse}{12}{section.6}
+\contentsline {section}{\numberline {A}Auftragsbeschreibung}{13}{appendix.A}
+\babel@toc {english}{}
+\babel@toc {ngerman}{}
