@@ -4,7 +4,7 @@ set outro=all meta data successfully cleared..
 echo %intro%
 pause
 cd 
-del *.aux *.bcf *.log *.out *.xml *.gz *.toc
+del *.aux *.bcf *.log *.out *.xml *.gz *.toc *.bbl *.blg 
 cd sections
 del *.aux
 cd technical
