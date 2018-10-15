@@ -1,4 +1,5 @@
 \section{Grundkonzept}
+\label{chap:grundkonzept}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\textwidth]{graphics/Grundkonzept.PNG}
@@ -13,9 +14,47 @@ Als Zentralrecheneinheit wird eine \textit{Micro-Controller-Unit (MCU)} verwende
 \hrule
 \vspace{0.25cm}
 
-Das gesamte Grundkonzept ist, wie in der Abbildung \ref{fig:grundkonzept} graphisch Dargestellt, modular aufgebaut. Auf alle einzelnen Module wird folgend spezifischer eingegangen und die Konzeptvariationen vorgestellt.
+Das gesamte Grundkonzept ist, wie in der Abbildung \ref{fig:grundkonzept} graphisch Dargestellt, modular aufgebaut. Auf alle einzelnen Module wird folgend spezifischer eingegangen und die Konzeptvariationen vorgestellt. Dafür sind zusätzlich noch Vor- \& Nachteile für die Varianten aufgelistet.\\
 \newpage
+
 \subsection{Micro Controller Unit (MCU)}
+\paragraph{Variante 1:}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \vspace{-10pt}
+  \begin{center}
+    \includegraphics[width=0.38\textwidth]{graphics/arduino_mega.png}
+  \end{center}
+  \vspace{-10pt}
+  \caption{Arduino Mega}
+  \vspace{-10pt}
+  \label{fig:arduino_mega}
+\end{wrapfigure}
+Für den \textit{MCU} wird ein ATmega2560 8-bit Microcontroller auf einem Arduino Mega Board implementiert verwendet. Dieser hat 256 KB Flash Memory\footnote{abzüglich 8 KB des Bootloaders} und 8 KB SRAM, was genügend Kapazität für die Implementation der Ablaufsteuerung der Wetterstation bietet. Er oszilliert mit 16 MHz.\\
+
+\paragraph{Variante 2:}
+
+Es wird ein separates Printed Circuit Board (PCB) für die MCU designed. Dafür wird der gleiche Microcontroller wie bei Variante 1 verwendet.\\
+
+\begin{table}[h]
+  \centering
+  \label{tab:mcu}
+  \small
+  \caption{Vor- \& Nachteile}
+    \begin{tabular}{c|l|l}
+          & \textbf{Vorteile} & \textbf{Nachteile} \\
+    \toprule
+    \multirow{4}[2]{*}{\textbf{Variante 1}} & • in-system Programmierung &  \\
+          & \hspace{0.3cm} über USB Typ B möglich &  \\
+          & • USB-Schnittstelle für eine &  \\
+          &   \hspace{0.3cm} Datenkommunikation mit PC &  \\
+    \hline
+    \multirow{4}[1]{*}{\textbf{Variante 2}} &       & • zusätzlicher ICSP-Header für \\
+          &       & \hspace{0.3cm} eine in-system Programmierung mit \\
+          &       & \hspace{0.3cm} einem zusätzlichen Gerät (z.B. AVR Dragon) \\
+          &       & • benötigt UART-to-USB Chip \\
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
 
 \newpage
 \subsection{Sensoren}
@@ -26,14 +65,15 @@ Das gesamte Grundkonzept ist, wie in der Abbildung \ref{fig:grundkonzept} graphi
 \end{figure}
 
 \subsubsection*{Sensoraufbau}
+In der Abbildung \ref{fig:sensoraufbau} ist graphisch gezeigt, wie ein einzelner Sensor in etwa aufgebaut ist. 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{graphics/Sensoraufbau.PNG}
 \caption{Sensoraufbau}
+\label{fig:sensoraufbau}
 \end{figure}
 
 \subsubsection{Temperatursensor}
-
 
 \subsubsection{Luftfeuchtigkeitssensor}
 Die Bestimmung der relativen Luftfeuchtigkeit spielt eine markante Rolle in der Meteorologie. Dieser Wert sagt aus, wie sehr die Luft mit Wasserdampf gesättigt ist und wird mit anderen Faktoren benutzt um zuverlässige lokale Wetterprognosen zu erstellen. Die Normwerte für die Schweiz liegen ungefähr zwischen 58 und 92 Prozent relativer Luftfeuchtigkeit  \cite{MeteoSchweizFeuchte}.\\
@@ -49,22 +89,45 @@ Um die Windstärke zu messen, wird ein Schalenanemometer verwendet, da diese nic
 
 \subsubsection{Niederschlagsensor}
 
-
-\newpage
 \subsection{Kommunikationsmodul}
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{graphics/Kommunikationsmodul.PNG}
 \caption{Kommunikationsmodul}
 \end{figure}
-
 \newpage
 \subsection{Datenspeicherung}
+\paragraph{Variante 1:}
 
-\newpage
+Die Datenspeicherung erfolgt auf einer $\mu$SD-Karte. Diese kann in ein Breakoutboard eingeschoben werden.\\
+
+\paragraph{Variante 2:}
+
+Es werden zur Datenspeicherung EEPROM's benutzt.\\
+
+\begin{table}[h]
+  \centering
+  \label{tab:datenspeicherung}
+  \small
+  \caption{Vor- \& Nachteile}
+    \begin{tabular}{c|l|l}
+          & \textbf{Vorteile} & \textbf{Nachteile} \\
+    \toprule
+    \multirow{4}[2]{*}{\textbf{Variante 1}} & • internes level-shifting & • es wird ein zusätzliches \\
+          & • grosser Speicherplatz & \hspace{0.3cm}Breakoutboard verwendet \\
+          & • Daten können notfalls auch &  \\
+          &   \hspace{0.3cm} direkt von der $\mu$SD-Karte &  \\
+          &   \hspace{0.3cm} entnommen werden &  \\
+    \hline
+    \multirow{2}[1]{*}{\textbf{Variante 2}} &       & • kleiner Speicherplatz \\
+          &       & • benötigt level-shifting \\
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+
+
 \subsection{RTC}
 
-\newpage
 \subsection{Speisung}
 \begin{figure}[h]
 \centering
