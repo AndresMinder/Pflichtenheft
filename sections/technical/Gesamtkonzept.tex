@@ -25,7 +25,7 @@ Das gesamte Grundkonzept ist, wie in der Abbildung \ref{fig:grundkonzept} graphi
     \includegraphics[width=0.38\textwidth]{graphics/arduino_mega.png}
   \end{center}
   \vspace{-10pt}
-  \caption{Arduino Mega}
+  \caption{Arduino Mega \cite{Elektronik}}
   \vspace{-10pt}
   \label{fig:arduino_mega}
 \end{wrapfigure}
@@ -53,7 +53,7 @@ Es wird ein separates Printed Circuit Board (PCB) für die MCU designed. Dafür 
           &       & \hspace{0.3cm} einem zusätzlichen Gerät (z.B. AVR Dragon) \\
           &       & • benötigt UART-to-USB Chip \\
     \end{tabular}%
-  \label{tab:addlabel}%
+  \label{tab:mcu}%
 \end{table}%
 
 \newpage
@@ -62,16 +62,53 @@ Es wird ein separates Printed Circuit Board (PCB) für die MCU designed. Dafür 
 \centering
 \includegraphics[scale=0.8]{graphics/Sensoren.PNG}
 \caption{Sensoren}
+\label{fig:sensoren}
 \end{figure}
+In dem Block \textit{Sensoren} werden alle Messeinheiten untergebracht. Die Idee dieses Blockes ist es, dass er adaptiv ist und somit leicht erweitert werden kann (Abbildung \ref{fig:sensoren}). Jeder Sensor ist nach dem Prinzip, wie in der Abbildung \ref{fig:sensoraufbau} gezeigt, aufgebaut. Es wird dann von der Seite des \textit{MCU}'s mit dem Datenlogger kommuniziert.\\
 
-\subsubsection*{Sensoraufbau}
-In der Abbildung \ref{fig:sensoraufbau} ist graphisch gezeigt, wie ein einzelner Sensor in etwa aufgebaut ist. 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{graphics/Sensoraufbau.PNG}
 \caption{Sensoraufbau}
 \label{fig:sensoraufbau}
 \end{figure}
+
+\paragraph{Variante 1:}
+
+Es werden nur die Messfühler gekauft. \\
+
+\paragraph{Variante 2:}
+
+Die Sensoren werden als intelligente Wettersensorik gekauft. Diese sind, je nach Typ, in verschiedenen Variationen mit unterschiedlichen Messparametern und -technologien ausgestattet. Zudem kompatibel für den Solarbetrieb in allen Klimazonen und Wartungsfrei\footnote{abhängig von den einzelnen Sensoren}.\\
+
+\newpage
+\paragraph{Variante 3}
+
+Eine Mischung aus der Variante 2 \& 3.\\
+
+\begin{table}[h]
+  \centering
+  \label{tab:mcu}
+  \small
+  \caption{Vor- \& Nachteile}
+    \begin{tabular}{c|l|l}
+          & \textbf{Vorteile} & \textbf{Nachteile} \\
+    \toprule
+    \multirow{4}[2]{*}{\textbf{Variante 1}} & • günstig & • sehr arbeitsaufwändig \\
+          &  & • eingeschränkt, da einzelne Messfühler \\
+          &  & \hspace{0.3cm} teils nur als komplette Sensorik \\
+          &  & \hspace{0.3cm} erhältlich sind \\
+    \hline
+    \multirow{2}[1]{*}{\textbf{Variante 2}} & • wartungsfrei & • teuer \\
+          & • kompatibel für Solarbetrieb &  \\
+    \hline
+    \multirow{4}[1]{*}{\textbf{Variante 3}} &  &  \\
+          &       &  \\
+          &       &  \\
+          &       &  \\
+    \end{tabular}%
+  \label{tab:sensoren}
+\end{table}
 
 \subsubsection{Temperatursensor}
 
