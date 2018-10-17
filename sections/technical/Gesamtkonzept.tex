@@ -10,11 +10,7 @@
 \paragraph{Übersicht:}
 Als Zentralrecheneinheit wird eine \textit{Micro-Controller-Unit (MCU)} verwendet. Dieser ist dafür verantwortlich, dass die Daten richtig verarbeitet und an das dementsprechende Modul weitergeleitet werden. Die Messdaten werden in digitaler Form vom Modul \textit{Sensoren} an die \textit{MCU} übertragen. Dieser fügt mit dem \textit{Real-Time-Clock (RTC)} einen Timestamp hinzu, wobei anschließend die Daten in der \textit{Datenspeicherung} nichtflüchtig gespeichert werden. Über das \textit{Kommunikationsmodul} können dann die Daten von Nutznießern abgefragt werden.
 
-\vspace{0.5cm}
-\hrule
-\vspace{0.25cm}
-
-Das gesamte Grundkonzept ist, wie in der Abbildung \ref{fig:grundkonzept} graphisch Dargestellt, modular aufgebaut. Auf alle einzelnen Module wird folgend spezifischer eingegangen und die Konzeptvariationen vorgestellt. Dafür sind zusätzlich noch Vor- \& Nachteile für die Varianten aufgelistet.\\
+Das gesamte Grundkonzept ist, wie in der Abbildung \ref{fig:grundkonzept} grafisch dargestellt, modular aufgebaut. Auf alle einzelnen Module wird folgend spezifischer eingegangen und die Konzeptvariationen vorgestellt. Dafür sind zusätzlich noch Vor- \& Nachteile für die Varianten aufgelistet.\\
 \newpage
 
 \subsection{Micro Controller Unit (MCU)}
@@ -29,11 +25,10 @@ Das gesamte Grundkonzept ist, wie in der Abbildung \ref{fig:grundkonzept} graphi
   \vspace{-10pt}
   \label{fig:arduino_mega}
 \end{wrapfigure}
-Für den \textit{MCU} wird ein ATmega2560 8-bit Microcontroller auf einem Arduino Mega Board implementiert verwendet. Dieser hat 256 KB Flash Memory\footnote{abzüglich 8 KB des Bootloaders} und 8 KB SRAM, was genügend Kapazität für die Implementation der Ablaufsteuerung der Wetterstation bietet. Er oszilliert mit 16 MHz.\\
+Für die \textit{MCU} wird ein Microcontroller mit bereits vorhandener Peripherie verwendet, welcher ähnlich wie der in Abbildung \ref{fig:arduino_mega} ersichtliche Arduino Mega aufgebaut sein wird.
 
 \paragraph{Variante 2:}
-
-Es wird ein separates Printed Circuit Board (PCB) für die MCU designed. Dafür wird der gleiche Microcontroller wie bei Variante 1 verwendet.\\
+Es wird ein separates Printed Circuit Board (PCB) für die \textit{MCU} designed.\\
 
 \begin{table}[h]
   \centering
@@ -43,15 +38,18 @@ Es wird ein separates Printed Circuit Board (PCB) für die MCU designed. Dafür 
     \begin{tabular}{c|l|l}
           & \textbf{Vorteile} & \textbf{Nachteile} \\
     \toprule
-    \multirow{4}[2]{*}{\textbf{Variante 1}} & • in-system Programmierung &  \\
+    \multirow{4}[2]{*}{\textbf{Variante 1}} & • In-system Programmierung &  \\
           & \hspace{0.3cm} über USB Typ B möglich &  \\
           & • USB-Schnittstelle für eine &  \\
           &   \hspace{0.3cm} Datenkommunikation mit PC &  \\
+          & • Erweiterbar über bereits  &  \\
+          &   \hspace{0.3cm} existierende Anschlüsse &  \\
+          & • Günstig in der Anschaffung  &  \\
     \hline
-    \multirow{4}[1]{*}{\textbf{Variante 2}} &       & • zusätzlicher ICSP-Header für \\
-          &       & \hspace{0.3cm} eine in-system Programmierung mit \\
-          &       & \hspace{0.3cm} einem zusätzlichen Gerät (z.B. AVR Dragon) \\
+    \multirow{4}[1]{*}{\textbf{Variante 2}} &       & • Zusätzliches Gerät (z.B. AVR Dragon) für \\
+          &       & \hspace{0.3cm} eine in-system Programmierung notwendig \\
           &       & • benötigt UART-to-USB Chip \\
+          &       & • Zeitintensive Entwicklung\\
     \end{tabular}%
   \label{tab:mcu}%
 \end{table}%
@@ -64,7 +62,7 @@ Es wird ein separates Printed Circuit Board (PCB) für die MCU designed. Dafür 
 \caption{Sensoren}
 \label{fig:sensoren}
 \end{figure}
-In dem Block \textit{Sensoren} werden alle Messeinheiten untergebracht. Die Idee dieses Blockes ist es, dass er adaptiv ist und somit leicht erweitert werden kann (Abbildung \ref{fig:sensoren}). Jeder Sensor ist nach dem Prinzip, wie in der Abbildung \ref{fig:sensoraufbau} gezeigt, aufgebaut. Es wird dann von der Seite des \textit{MCU}'s mit dem Datenlogger kommuniziert.\\
+In dem Block \textit{Sensoren} werden alle Messeinheiten untergebracht. Die Idee dieses Blockes besteht darin, dass dieser adaptiv ist und somit leicht erweitert werden kann (Abbildung \ref{fig:sensoren}). Jeder Sensor ist nach dem Prinzip, wie in der Abbildung \ref{fig:sensoraufbau} gezeigt, aufgebaut. Es wird dann von der Seite des \textit{MCU}s aus mit dem Datenlogger kommuniziert.\\
 
 \begin{figure}[h]
 \centering
@@ -75,7 +73,7 @@ In dem Block \textit{Sensoren} werden alle Messeinheiten untergebracht. Die Idee
 
 \paragraph{Variante 1:}
 
-Es werden nur die Messfühler gekauft. \\
+Bis auf die Fühler werden die Sensoren selbst entwickelt.\\
 
 \paragraph{Variante 2:}
 
@@ -84,7 +82,7 @@ Die Sensoren werden als intelligente Wettersensorik gekauft. Diese sind, je nach
 \newpage
 \paragraph{Variante 3}
 
-Eine Mischung aus der Variante 2 \& 3.\\
+Eine Mischung aus den Varianten 2 \& 3.\\
 
 \begin{table}[h]
   \centering
@@ -94,22 +92,21 @@ Eine Mischung aus der Variante 2 \& 3.\\
     \begin{tabular}{c|l|l}
           & \textbf{Vorteile} & \textbf{Nachteile} \\
     \toprule
-    \multirow{4}[2]{*}{\textbf{Variante 1}} & • günstig & • sehr arbeitsaufwändig \\
-          &  & • eingeschränkt, da einzelne Messfühler \\
+    \multirow{4}[2]{*}{\textbf{Variante 1}} & • Günstig & • Sehr arbeitsaufwändig \\
+          &  & • Eingeschränkt, da einzelne Messfühler \\
           &  & \hspace{0.3cm} teils nur als komplette Sensorik \\
           &  & \hspace{0.3cm} erhältlich sind \\
     \hline
-    \multirow{2}[1]{*}{\textbf{Variante 2}} & • wartungsfrei & • teuer \\
-          & • kompatibel für Solarbetrieb &  \\
+    \multirow{2}[1]{*}{\textbf{Variante 2}} & • Wartungsfreie Varianten & • Hoher Investitionskosten \\
+          & • Kompatibel für Solarbetrieb & • Machbarkeitsanalyse erforderlich \\
     \hline
-    \multirow{4}[1]{*}{\textbf{Variante 3}} &  &  \\
-          &       &  \\
-          &       &  \\
-          &       &  \\
+    \multirow{4}[1]{*}{\textbf{Variante 3}} &  &   \\
+          & •  Je nach Kombination & •  Je nach Kombination  \\
+          &    &  \\
     \end{tabular}%
   \label{tab:sensoren}
 \end{table}
-
+Tabelle \ref{tab:sensoren} zeigt Vor- und Nachteile für die erwähnten Varianten.\\
 \subsubsection{Temperatursensor}
 
 \subsubsection{Luftfeuchtigkeitssensor}
@@ -131,7 +128,9 @@ Um die Windstärke zu messen, wird ein Schalenanemometer verwendet, da diese nic
 \centering
 \includegraphics[scale=0.7]{graphics/Kommunikationsmodul.PNG}
 \caption{Kommunikationsmodul}
+\label{fig:kommunikationsmodul}
 \end{figure}
+Abbildung \ref{fig:kommunikationsmodul} zeigt die verschiedenen Schnittstellen, über welche Daten mit der Umgebung ausgetauscht werden können.\\
 \newpage
 \subsection{Datenspeicherung}
 \paragraph{Variante 1:}
@@ -150,24 +149,29 @@ Es werden zur Datenspeicherung EEPROM's benutzt.\\
     \begin{tabular}{c|l|l}
           & \textbf{Vorteile} & \textbf{Nachteile} \\
     \toprule
-    \multirow{4}[2]{*}{\textbf{Variante 1}} & • internes level-shifting & • es wird ein zusätzliches \\
-          & • grosser Speicherplatz & \hspace{0.3cm}Breakoutboard verwendet \\
+    \multirow{4}[2]{*}{\textbf{Variante 1}} & • Internes level-shifting & • Es wird ein zusätzliches \\
+          & • Grosser Speicherplatz & \hspace{0.3cm}Breakoutboard verwendet \\
           & • Daten können notfalls auch &  \\
           &   \hspace{0.3cm} direkt von der $\mu$SD-Karte &  \\
           &   \hspace{0.3cm} entnommen werden &  \\
     \hline
-    \multirow{2}[1]{*}{\textbf{Variante 2}} &       & • kleiner Speicherplatz \\
-          &       & • benötigt level-shifting \\
+    \multirow{2}[1]{*}{\textbf{Variante 2}} &       & • Kleiner Speicherplatz \\
+          &       & • Benötigt level-shifting \\
     \end{tabular}%
-  \label{tab:addlabel}%
+  \label{tab:Datenspeicherung}%
 \end{table}%
 
+Tabelle \ref{tab:Datenspeicherung} zeigt Vor- und Nachteile für die erwähnten Varianten.\\
 
 \subsection{RTC}
+Es wird eine RTC implementiert, welche aktuelle Zeitstempel für erhobene Datensätze ermittelt.\\
 
 \subsection{Speisung}
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{graphics/Energieversorgung.PNG}
 \caption{Energieversorgung}
+\label{fig:Energieversorgung}
 \end{figure}
+
+Für die Speisung wird ein Akku verwendet. Gemäss Abbildung \ref{fig:Energieversorgung} soll dieser durch eine Photovoltaikanlage, sowie über ein Anschlusskabel unterstützt bzw. geladen werden.\\
