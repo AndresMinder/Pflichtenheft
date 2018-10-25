@@ -38,18 +38,16 @@ Es wird ein separates Printed Circuit Board (PCB) für die \textit{MCU} designed
     \begin{tabular}{c|l|l}
           & \textbf{Vorteile} & \textbf{Nachteile} \\
     \toprule
-    \multirow{4}[2]{*}{\textbf{Variante 1}} & • In-system Programmierung &  \\
+    \multirow{4}[2]{*}{\textbf{Variante 1}} & • In-system Programmierung & • Etwas teurer (ca. 20.- CHF) \\
           & \hspace{0.3cm} über USB Typ B möglich &  \\
           & • USB-Schnittstelle für eine &  \\
           &   \hspace{0.3cm} Datenkommunikation mit PC &  \\
           & • Erweiterbar über bereits  &  \\
           &   \hspace{0.3cm} existierende Anschlüsse &  \\
-          & • Günstig in der Anschaffung  &  \\
     \hline
-    \multirow{4}[1]{*}{\textbf{Variante 2}} &       & • Zusätzliches Gerät (z.B. AVR Dragon) für \\
-          &       & \hspace{0.3cm} eine in-system Programmierung notwendig \\
-          &       & • benötigt UART-to-USB Chip \\
-          &       & • Zeitintensive Entwicklung\\
+    \multirow{3}[1]{*}{\textbf{Variante 2}} & • Keine unnötige Peripherie & • Zusätzliches Gerät (z.B. AVR Dragon) für \\
+          & • Dimensionierungsänderungen & \hspace{0.3cm} eine in-system Programmierung notwendig \\
+          & \hspace{0.3cm} möglich & • Zeitintensive Entwicklung\\
     \end{tabular}%
   \label{tab:mcu}%
 \end{table}%
@@ -73,7 +71,19 @@ In dem Block \textit{Sensoren} werden alle Messeinheiten untergebracht. Die Idee
 
 \paragraph{Variante 1:}
 
-Bis auf die Fühler werden die Sensoren selbst entwickelt.\\
+Bis auf die Fühler werden die Sensoren selbst entwickelt. Dafür werden die Sensoren für die Windstärke, Lufttemperatur, Regenmenge und  Sonnenstunden gebaut.\\
+
+\subparagraph{Windstärke:}
+Die einfachste Möglichkeit ist die Windstärke über ein Schalenanenometer zu bestimmen. Mittels Reed-Kontakt oder Lichtschranke wird die Drehfrequenz bestimmt und daraus eine Windstärkenstufe nach der Beaufort-Skala zugeordnet.\\
+
+\subparagraph{Lufttemperatur:}
+Auf einem PCB wird ein IC-Bauteil zur Lufttemperaturmessung implementiert. Über einen Messumformer nach Abbildung \ref{fig:sensoraufbau} wird das Signal zur Interpretation/Auslesung für den Datenlogger aufbereitet.\\
+
+\subparagraph{Regenmenge:}
+Für die Bestimmung der Regenmenge hat sich das Kipplöffelprinzip als äußerst effizient bewiesen. Über einen Reed-Kontakt wird die Kippfrequenz bestimmt, und daraus kann auf die Regenmenge zurück geschlossen werden.\\
+
+\subparagraph{Sonnenstunden:}
+Die Sonnenstunden benötigen keinen separaten Sensor. Es ist möglich, die Länge und Intensität der Bestrahlung über die Photovoltaik zu bestimmen. Dafür muss lediglich das von der Photovoltaik zugeführte Stromsignal abgegriffen werden.\\
 
 \paragraph{Variante 2:}
 
@@ -82,7 +92,7 @@ Die Sensoren werden als intelligente Wettersensorik gekauft. Diese sind, je nach
 \newpage
 \paragraph{Variante 3}
 
-Eine Mischung aus den Varianten 2 \& 3.\\
+Eine Mischung aus den Varianten 1 \& 2.\\
 
 \begin{table}[h]
   \centering
@@ -94,10 +104,10 @@ Eine Mischung aus den Varianten 2 \& 3.\\
     \toprule
     \multirow{4}[2]{*}{\textbf{Variante 1}} & • Günstig & • Sehr arbeitsaufwändig \\
           &  & • Eingeschränkt, da einzelne Messfühler \\
-          &  & \hspace{0.3cm} teils nur als komplette Sensorik \\
           &  & \hspace{0.3cm} erhältlich sind \\
+          &  & • sehr Zeitaufwendig \\
     \hline
-    \multirow{2}[1]{*}{\textbf{Variante 2}} & • Wartungsfreie Varianten & • Hoher Investitionskosten \\
+    \multirow{2}[1]{*}{\textbf{Variante 2}} & • Wartungsfreie Varianten & • Hohe Investitionskosten \\
           & • Kompatibel für Solarbetrieb & • Machbarkeitsanalyse erforderlich \\
     \hline
     \multirow{4}[1]{*}{\textbf{Variante 3}} &  &   \\
@@ -116,8 +126,17 @@ Tabelle \ref{tab:sensoren} zeigt Vor- und Nachteile für die erwähnten Variante
 \caption{Kommunikationsmodul}
 \label{fig:kommunikationsmodul}
 \end{figure}
-Abbildung \ref{fig:kommunikationsmodul} zeigt die verschiedenen Schnittstellen, über welche Daten mit der Umgebung ausgetauscht werden können.\\
-\newpage
+Abbildung \ref{fig:kommunikationsmodul} zeigt die verschiedenen Schnittstellen, über welche Daten mit der Umgebung (User) und \textit{MCU} ausgetauscht werden können. Im Rahmen des Projekts 5 wird nur das USB-Interface umgesetzt. Mobilfunknetz und GPS sind Teil des Projekts 6.\\
+
+\subparagraph{USB-Interface:}
+Über dieses Interface kann mit dem System kommuniziert und interagiert werden.\\
+
+\subparagraph{Mobilfunknetz:}
+Die Einbindung der Wetterstation wird über diesen Block implementiert.\\
+
+\subparagraph{GPS:}
+Dieser Block sorgt für die Standortbestimmung.\\
+
 \subsection{Datenspeicherung}
 \paragraph{Variante 1:}
 
@@ -152,7 +171,7 @@ Tabelle \ref{tab:Datenspeicherung} zeigt Vor- und Nachteile für die erwähnten 
 \subsection{RTC}
 Es wird eine RTC implementiert, welche aktuelle Zeitstempel für erhobene Datensätze ermittelt.\\
 
-\subsection{Speisung}
+\subsection{Energieversorgung}
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{graphics/Energieversorgung.PNG}
@@ -160,4 +179,4 @@ Es wird eine RTC implementiert, welche aktuelle Zeitstempel für erhobene Datens
 \label{fig:Energieversorgung}
 \end{figure}
 
-Für die Speisung wird ein Akku verwendet. Gemäss Abbildung \ref{fig:Energieversorgung} soll dieser durch eine Photovoltaikanlage, sowie über ein Anschlusskabel unterstützt bzw. geladen werden.\\
+Für die Speisung wird ein Akku verwendet. Gemäss Abbildung \ref{fig:Energieversorgung} soll dieser durch eine Photovoltaikanlage geladen werden. Als Wunschziel soll der Akku austauschbar ist.\\
